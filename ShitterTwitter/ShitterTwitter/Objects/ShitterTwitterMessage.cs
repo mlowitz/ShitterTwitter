@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
+using Newtonsoft.Json;
 using ShitterTwitter.Common.Objects;
 
 namespace ShitterTwitter
