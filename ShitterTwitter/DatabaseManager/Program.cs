@@ -7,6 +7,7 @@ using System.Xml.Serialization;
 using ShitterTwitter;
 using ShitterTwitter.Common.Objects;
 using ShitterTwitter.DAL;
+using IShitterTwitterMessage = ShitterTwitter.IShitterTwitterMessage;
 
 namespace DatabaseManager
 {
@@ -36,6 +37,8 @@ namespace DatabaseManager
                         maneger.AddMessage(MakeMessage());
                         break;
                     case 2:
+                        var read = maneger.GetAllShitterMessages();
+                        ReadMessages(read);
                         break;
                     case 3:
                         break;
@@ -53,7 +56,7 @@ namespace DatabaseManager
 
         public static IShitterTwitterMessage MakeMessage()
         {
-            IShitterTwitterMessage message = new ShitterTwitterMessage();
+            IShitterTwitterMessage message = new IShitterTwitterMessage();
 
             Console.WriteLine("Enter Message: ");
             message.Message = Console.ReadLine();
@@ -63,9 +66,14 @@ namespace DatabaseManager
             return message;
         }
 
-        public static void ReadMessages()
+
+
+        public static void ReadMessages(List<IShitterTwitterMessage> messages )
         {
-            
+            foreach (IShitterTwitterMessage message in messages)
+            {
+                Console.WriteLine(message.Message);
+            }
         }
     }
 }

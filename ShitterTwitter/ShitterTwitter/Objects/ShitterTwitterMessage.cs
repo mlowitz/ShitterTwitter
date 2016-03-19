@@ -6,7 +6,7 @@ using ShitterTwitter.Common.Objects;
 namespace ShitterTwitter
 {
     [Serializable]
-    public class ShitterTwitterMessage : IShitterTwitterMessage
+    public class IShitterTwitterMessage : Common.Objects.IShitterTwitterMessage
     {
         public string id { get; set; }
         public string Message { get; set; }

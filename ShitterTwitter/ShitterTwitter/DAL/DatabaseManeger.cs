@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
@@ -71,9 +72,15 @@ namespace ShitterTwitter.DAL
 
 
      
-        public Document GetDocument(string query)
+        public  List<IShitterTwitterMessage> GetAllShitterMessages()
         {
-            throw new NotImplementedException();
+            string query = "SELECT * " +
+                           "FROM Tweets T ";
+            var resuslts =
+                _client.CreateDocumentQuery<IShitterTwitterMessage>("dbs/" + _database.Id + "/colls/" + _collection.Id,
+                    query).ToList();
+
+            return resuslts;
         }
     }
 }
