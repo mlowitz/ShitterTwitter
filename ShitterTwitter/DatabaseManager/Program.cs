@@ -7,6 +7,7 @@ using System.Xml.Serialization;
 using ShitterTwitter;
 using ShitterTwitter.Common.Objects;
 using ShitterTwitter.DAL;
+using ShitterTwitter.MessagePublisher;
 using IShitterTwitterMessage = ShitterTwitter.IShitterTwitterMessage;
 
 namespace DatabaseManager
@@ -14,10 +15,12 @@ namespace DatabaseManager
     class Program
     {
         public static IDatabaseManeger maneger;
-
+        public static TwitterManeger Twitter;
         static void Main(string[] args)
         {
             maneger = new DatabaseManeger();
+            Twitter = new TwitterManeger();
+
             while (true)
             {
                 Console.Clear();
@@ -32,29 +35,37 @@ namespace DatabaseManager
                 Console.WriteLine("5) Exit");
                 Console.WriteLine(": ");
                 var chocie = Console.ReadLine();
-                var choiceint = int.Parse(chocie);
-
-                switch (choiceint)
+                int choiceint;
+                if (int.TryParse(chocie, out choiceint))
                 {
-                    case 1:
-                        maneger.AddMessage(MakeMessage());
-                        break;
-                    case 2:
-                        var read = maneger.GetAllShitterMessages();
-                        ReadMessages(read);
-                        break;
-                    case 3:
-                        Tweetit();
-                        break;
-                    case 5:
-                        return;
-                    default:
-                        Console.WriteLine("invalid");
 
-                        break;
+
+
+                
+                    
+
+                    switch (choiceint)
+                    {
+                        case 1:
+                            maneger.AddMessage(MakeMessage());
+                            break;
+                        case 2:
+                            var read = maneger.GetAllShitterMessages();
+                            ReadMessages(read);
+                            break;
+                        case 3:
+                            Tweetit();
+                            break;
+                        case 5:
+                            return;
+                        default:
+                            Console.WriteLine("invalid");
+
+                            break;
+                    }
                 }
             }
-            
+
 
         }
 
@@ -74,6 +85,7 @@ namespace DatabaseManager
         public static void Tweetit()
         {
             var message =  maneger.GetMessageToTweet();
+            Twitter.sendTweet(message.Message);
             Console.WriteLine(message.Message);
             Console.WriteLine(message.DateLastUsed);
             Console.ReadKey();
