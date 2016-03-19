@@ -71,7 +71,52 @@ namespace ShitterTwitter.DAL
         }
 
 
-     
+        public IShitterTwitterMessage GetMessageToTweet()
+        {
+            Random rand = new Random();
+            string query = "SELECT * " +
+                           "From Tweets t " +
+                           "Where t.DateLastUsed = null";
+            var resuslts =
+                _client.CreateDocumentQuery<IShitterTwitterMessage>("dbs/" + _database.Id + "/colls/" + _collection.Id,
+                    query).ToList();
+
+            int max = resuslts.Count ;
+
+            int randnum = rand.Next(0, max);
+            var returnVal = resuslts[randnum]; 
+            //Mar as red 
+            returnVal.DateLastUsed = DateTime.Now.ToString("o");
+            UpdateMessage(returnVal);
+            return returnVal;
+        }
+
+
+        public void UpdateMessage(IShitterTwitterMessage toUpdate)
+        {
+            var doc = GetDocument(toUpdate.id);
+
+           _client.ReplaceDocumentAsync(doc.SelfLink,
+                toUpdate).Wait();
+        }
+
+        public IShitterTwitterMessage GetByID(string id)
+        {
+            return _client.CreateDocumentQuery<IShitterTwitterMessage>("dbs/" + _database.Id + "/colls/" + _collection.Id)
+                    .Where(e => e.id == id)
+                    .AsEnumerable()
+                    .First();
+        }
+
+
+        private  Document GetDocument( string id)
+        {
+            return _client.CreateDocumentQuery("dbs/" + _database.Id + "/colls/" + _collection.Id)
+                   .Where(e => e.Id == id)
+                   .AsEnumerable()
+                   .First();
+        }
+
         public  List<IShitterTwitterMessage> GetAllShitterMessages()
         {
             string query = "SELECT * " +

@@ -13,9 +13,11 @@ namespace DatabaseManager
 {
     class Program
     {
+        public static IDatabaseManeger maneger;
+
         static void Main(string[] args)
         {
-            IDatabaseManeger maneger = new DatabaseManeger();
+            maneger = new DatabaseManeger();
             while (true)
             {
                 Console.Clear();
@@ -24,9 +26,10 @@ namespace DatabaseManager
                 Console.WriteLine("************************************");
                 Console.WriteLine();
                 Console.WriteLine("1) Add Message");
-                Console.WriteLine("2) Read Message");
-                Console.WriteLine("3) Delete Message");
-                Console.WriteLine("4) Exit");
+                Console.WriteLine("2) Read Messages");
+                Console.WriteLine("3) Tweet it");
+                Console.WriteLine("4) Delete Message");
+                Console.WriteLine("5) Exit");
                 Console.WriteLine(": ");
                 var chocie = Console.ReadLine();
                 var choiceint = int.Parse(chocie);
@@ -41,8 +44,9 @@ namespace DatabaseManager
                         ReadMessages(read);
                         break;
                     case 3:
+                        Tweetit();
                         break;
-                    case 4:
+                    case 5:
                         return;
                     default:
                         Console.WriteLine("invalid");
@@ -62,11 +66,18 @@ namespace DatabaseManager
             message.Message = Console.ReadLine();
             message.DateAdded = DateTime.Now.ToString("o");
             message.MessageType = 1;
+            
 
             return message;
         }
 
-
+        public static void Tweetit()
+        {
+            var message =  maneger.GetMessageToTweet();
+            Console.WriteLine(message.Message);
+            Console.WriteLine(message.DateLastUsed);
+            Console.ReadKey();
+        }
 
         public static void ReadMessages(List<IShitterTwitterMessage> messages )
         {

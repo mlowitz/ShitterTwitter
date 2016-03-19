@@ -11,7 +11,8 @@ namespace ShitterTwitter.DAL
     {
         void AddMessage(IShitterTwitterMessage document);
         List<IShitterTwitterMessage> GetAllShitterMessages();
-
+        void UpdateMessage(IShitterTwitterMessage toUpdate);
+        IShitterTwitterMessage GetMessageToTweet();
 
     }
 }
