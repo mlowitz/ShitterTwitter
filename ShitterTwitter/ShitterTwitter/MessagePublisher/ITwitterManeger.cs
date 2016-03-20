@@ -1,4 +1,4 @@
-﻿namespace ShitterTwitter.MessagePublisher
+﻿namespace ShitterTwitter.Common.MessagePublisher
 {
     public interface ITwitterManeger
     {

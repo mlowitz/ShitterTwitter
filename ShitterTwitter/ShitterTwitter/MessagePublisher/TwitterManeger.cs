@@ -4,7 +4,7 @@ using System.Net.Security;
 using TweetSharp;
 
 
-namespace ShitterTwitter.MessagePublisher
+namespace ShitterTwitter.Common.MessagePublisher
 {
     public class TwitterManeger : ITwitterManeger
     {

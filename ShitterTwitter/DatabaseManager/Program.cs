@@ -5,9 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using ShitterTwitter;
+using ShitterTwitter.Common.DAL;
+using ShitterTwitter.Common.MessagePublisher;
 using ShitterTwitter.Common.Objects;
 using ShitterTwitter.DAL;
-using ShitterTwitter.MessagePublisher;
+
 
 namespace DatabaseManager
 {
@@ -74,7 +76,7 @@ namespace DatabaseManager
 
             Console.WriteLine("Enter Message: ");
             message.Message = Console.ReadLine();
-            message.DateAdded = DateTime.Now.ToString("o");
+           
             message.MessageType = 1;
             
 
@@ -96,6 +98,7 @@ namespace DatabaseManager
             {
                 Console.WriteLine(message.Message);
             }
+            Console.ReadKey();
         }
     }
 }

@@ -7,8 +7,9 @@ using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
 using Microsoft.Azure.Documents.Linq;
 using ShitterTwitter.Common.Objects;
+using ShitterTwitter.DAL;
 
-namespace ShitterTwitter.DAL
+namespace ShitterTwitter.Common.DAL
 {
     public class DatabaseManeger :IDatabaseManeger
     {
@@ -50,7 +51,7 @@ namespace ShitterTwitter.DAL
         public async Task AddMessage(IShitterTwitterMessage toAdd)
         {
             toAdd.id = Guid.NewGuid().ToString();
-
+            toAdd.DateAdded = DateTime.Now.ToString("O");
             var document =
                 _client.CreateDocumentQuery("dbs/" + _database.Id + "/colls/" + _collection.Id)
                     .Where(d => d.Id == toAdd.id)
@@ -77,20 +78,23 @@ namespace ShitterTwitter.DAL
             string query = "SELECT * " +
                            "From Tweets t " +
                            "Where t.DateLastUsed = null";
-            var resuslts =
-                _client.CreateDocumentQuery<IShitterTwitterMessage>("dbs/" + _database.Id + "/colls/" + _collection.Id,
-                    query).ToList();
+            List<IShitterTwitterMessage> results = new List<IShitterTwitterMessage>();
 
-            int max = resuslts.Count ;
+            var vars =
+                _client.CreateDocumentQuery<ShitterTwitterMessage>("dbs/" + _database.Id + "/colls/" + _collection.Id,
+                    query).ToList();
+            results.AddRange(vars);
+
+            int max = results.Count ;
             if (max <1)
             {
-                resuslts = GetAllShitterMessages();
-                max = resuslts.Count;
+                results = GetAllShitterMessages();
+                max = results.Count;
             }
 
 
             int randnum = rand.Next(0, max);
-            var returnVal = resuslts[randnum]; 
+            var returnVal = results[randnum]; 
             //Mar as red 
             returnVal.DateLastUsed = DateTime.Now.ToString("o");
             UpdateMessage(returnVal);
@@ -127,11 +131,13 @@ namespace ShitterTwitter.DAL
         {
             string query = "SELECT * " +
                            "FROM Tweets T ";
-            var resuslts =
-                _client.CreateDocumentQuery<IShitterTwitterMessage>("dbs/" + _database.Id + "/colls/" + _collection.Id,
-                    query).ToList();
+            List<IShitterTwitterMessage> returnVal = new List<IShitterTwitterMessage>();
 
-            return resuslts;
+            var resuslts =
+                _client.CreateDocumentQuery<ShitterTwitterMessage>("dbs/" + _database.Id + "/colls/" + _collection.Id,
+                    query).ToList();
+            returnVal.AddRange(resuslts);
+            return returnVal;
         }
     }
 }

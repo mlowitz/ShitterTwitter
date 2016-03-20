@@ -23,6 +23,7 @@ namespace ShitterBotWeb.Controllers
         {
             DatabaseManeger db = new DatabaseManeger();
             await db.AddMessage(new ShitterTwitterMessage() { Message = tweet });
+            //TODO need to add code to confirm uplaod 
 
             return tweet;
         }

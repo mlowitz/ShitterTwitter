@@ -5,7 +5,7 @@ using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
 using ShitterTwitter.Common.Objects;
 
-namespace ShitterTwitter.DAL
+namespace ShitterTwitter.Common.DAL
 {
     public interface IDatabaseManeger
     {
