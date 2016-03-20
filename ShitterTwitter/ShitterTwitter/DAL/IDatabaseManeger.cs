@@ -9,7 +9,7 @@ namespace ShitterTwitter.DAL
 {
     public interface IDatabaseManeger
     {
-        void AddMessage(IShitterTwitterMessage document);
+        Task AddMessage(IShitterTwitterMessage document);
         List<IShitterTwitterMessage> GetAllShitterMessages();
         void UpdateMessage(IShitterTwitterMessage toUpdate);
         IShitterTwitterMessage GetMessageToTweet();

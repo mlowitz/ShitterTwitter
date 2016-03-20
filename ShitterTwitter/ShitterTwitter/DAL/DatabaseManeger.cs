@@ -47,7 +47,7 @@ namespace ShitterTwitter.DAL
 
         }
 
-        public async void AddMessage(IShitterTwitterMessage toAdd)
+        public async Task AddMessage(IShitterTwitterMessage toAdd)
         {
             toAdd.id = Guid.NewGuid().ToString();
 

@@ -7,6 +7,7 @@ using ShitterBotWeb;
 using ShitterTwitter.Common.DAL;
 using ShitterTwitter.Common.Objects;
 using ShitterTwitter.DAL;
+using System.Threading.Tasks;
 
 namespace ShitterBotWeb.Controllers
 {
@@ -18,10 +19,10 @@ namespace ShitterBotWeb.Controllers
              return "This is my <b>default</b> action...";
         }
 
-        public string AddTweet(string tweet)
+        public async Task<string> Add(string tweet)
         {
             DatabaseManeger db = new DatabaseManeger();
-            db.AddMessage(new ShitterTwitterMessage() {Message = tweet});
+            await db.AddMessage(new ShitterTwitterMessage() { Message = tweet });
 
             return tweet;
         }
