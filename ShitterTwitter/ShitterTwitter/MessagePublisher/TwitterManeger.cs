@@ -20,6 +20,8 @@ namespace ShitterTwitter.MessagePublisher
           _service = new TwitterService(_consumerKey,_consumerSecret);
             _service.AuthenticateWith(_accessToken,_accessTokenSecret);
         }
+        //TODO auto like all mentions 
+
 
         public void sendTweet(string tweet)
         {

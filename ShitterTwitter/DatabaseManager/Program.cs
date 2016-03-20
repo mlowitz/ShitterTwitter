@@ -8,7 +8,6 @@ using ShitterTwitter;
 using ShitterTwitter.Common.Objects;
 using ShitterTwitter.DAL;
 using ShitterTwitter.MessagePublisher;
-using IShitterTwitterMessage = ShitterTwitter.IShitterTwitterMessage;
 
 namespace DatabaseManager
 {
@@ -71,7 +70,7 @@ namespace DatabaseManager
 
         public static IShitterTwitterMessage MakeMessage()
         {
-            IShitterTwitterMessage message = new IShitterTwitterMessage();
+            IShitterTwitterMessage message = new ShitterTwitterMessage();
 
             Console.WriteLine("Enter Message: ");
             message.Message = Console.ReadLine();

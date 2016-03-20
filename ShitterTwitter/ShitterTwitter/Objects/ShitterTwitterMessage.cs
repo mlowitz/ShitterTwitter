@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Diagnostics.Contracts;
-using Newtonsoft.Json;
-using ShitterTwitter.Common.Objects;
 
-namespace ShitterTwitter
+namespace ShitterTwitter.Common.Objects
 {
     [Serializable]
-    public class IShitterTwitterMessage : Common.Objects.IShitterTwitterMessage
+    public class ShitterTwitterMessage : IShitterTwitterMessage
     {
         public string id { get; set; }
         public string Message { get; set; }

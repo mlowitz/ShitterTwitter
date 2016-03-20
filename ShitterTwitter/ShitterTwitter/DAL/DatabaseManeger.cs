@@ -82,6 +82,12 @@ namespace ShitterTwitter.DAL
                     query).ToList();
 
             int max = resuslts.Count ;
+            if (max <1)
+            {
+                resuslts = GetAllShitterMessages();
+                max = resuslts.Count;
+            }
+
 
             int randnum = rand.Next(0, max);
             var returnVal = resuslts[randnum]; 
