@@ -19,16 +19,21 @@ namespace ShitterBotWeb.Controllers
         //     return "This is my <b>default</b> action...";
         //}
 
-        public async Task<string> Add(string tweet)
+        public async Task<string> Add(string tweet, int key)
         {
-            DatabaseManeger db = new DatabaseManeger();
-            await db.AddMessage(new ShitterTwitterMessage() { Message = tweet });
-            //TODO need to add code to confirm uplaod 
 
+            if (key == 1234)
+            {
+
+
+                DatabaseManeger db = new DatabaseManeger();
+                await db.AddMessage(new ShitterTwitterMessage() {Message = tweet});
+                //TODO need to add code to confirm uplaod 
+            }
             return tweet;
         }
 
-        [HttpPost]
+   
         public ActionResult Index()
         {
             return View();

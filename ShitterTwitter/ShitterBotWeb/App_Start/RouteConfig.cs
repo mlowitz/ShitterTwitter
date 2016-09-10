@@ -21,7 +21,7 @@ namespace ShitterBotWeb
 
             routes.MapRoute(
               name: "Tweet",
-              url: "{controller}/{action}/{tweet}"
+              url: "{controller}/{action}/{key}/{tweet}"
           );
 
         }
