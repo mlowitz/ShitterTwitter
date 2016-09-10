@@ -27,5 +27,18 @@ namespace ShitterBotWeb.Controllers
 
             return tweet;
         }
+
+        public ActionResult AddTweetView()
+        {
+            return View();
+        }
+        public async Task<string> AddFromUI(string tweet)
+        {
+            DatabaseManeger db = new DatabaseManeger();
+            await db.AddMessage(new ShitterTwitterMessage() { Message = tweet });
+            //TODO need to add code to confirm uplaod 
+
+            return tweet;
+        }
     }
 }
