@@ -14,10 +14,10 @@ namespace ShitterBotWeb.Controllers
     public class AddTweetController : Controller
     {
         // GET: AddTweet
-        public string Index()
-        {
-             return "This is my <b>default</b> action...";
-        }
+        //public string Index()
+        //{
+        //     return "This is my <b>default</b> action...";
+        //}
 
         public async Task<string> Add(string tweet)
         {
@@ -28,17 +28,22 @@ namespace ShitterBotWeb.Controllers
             return tweet;
         }
 
-        public ActionResult AddTweetView()
+        [HttpPost]
+        public ActionResult Index()
         {
             return View();
         }
+
+        [HttpPost]
         public async Task<string> AddFromUI(string tweet)
         {
             DatabaseManeger db = new DatabaseManeger();
-            await db.AddMessage(new ShitterTwitterMessage() { Message = tweet });
+            await db.AddMessage(new ShitterTwitterMessage() {Message = tweet});
             //TODO need to add code to confirm uplaod 
 
             return tweet;
         }
+
+
     }
 }

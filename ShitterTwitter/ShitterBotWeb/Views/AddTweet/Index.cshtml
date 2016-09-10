@@ -1,0 +1,31 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@Html.TextBox("txtValue", null, new { placeholder = "Input value" })
+<input type="button" value="Start" id="btnStart" />
+
+<script>
+    $(function () {
+    $('#btnStart').unbind('click');
+    $('#btnStart').on('click', function () {
+        $.ajax({
+            url: "/AddTweetController/AddFromUI",
+            type: 'POST',
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            data: JSON.stringify({
+                txtValue: $("#txtValue").val()
+            }),
+            async: false
+        });
+    });
+   });
+</script>}
+<h2>AddTweetView</h2>
+
+<p>Hello from our View Template!</p>
