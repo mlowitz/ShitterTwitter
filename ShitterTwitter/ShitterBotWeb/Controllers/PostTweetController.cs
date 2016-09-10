@@ -14,7 +14,14 @@ namespace ShitterBotWeb.Controllers
         // GET: post
         public string Index()
         {
-            return "This is my <b>default</b> action...";
+            DatabaseManeger db = new DatabaseManeger();
+            IShitterTwitterMessage message = db.GetMessageToTweet();
+
+            TwitterManeger tm = new TwitterManeger();
+            tm.sendTweet(message.Message);
+
+
+            return message.Message;
         }
 
         public string Post()
