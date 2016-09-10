@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Diagnostics.Contracts;
-using ShitterTwitter.Common.Objects;
 
-namespace ShitterTwitter
+namespace ShitterTwitter.Common.Objects
 {
     [Serializable]
     public class ShitterTwitterMessage : IShitterTwitterMessage
